@@ -1,5 +1,6 @@
 import { RandomFox } from "@/components/RandomFox";
 import { useState } from "react";
+import type { MouseEventHandler } from "react";
 
 //generate a random function between 1 and 123
 const random = (): number => Math.floor(Math.random() * 123) + 1;
@@ -7,19 +8,23 @@ const random = (): number => Math.floor(Math.random() * 123) + 1;
 //generate simple unique id
 const generatetId = () => Math.random().toString(36).substr(2, 9);
 
-type imageItems = Array<{ id: string; url: string }>;
+type imageItems = { id: string; url: string };
 
 export default function Home() {
-  const [images, setImages] = useState<Array<imageItems>>([
-    { id: generatetId(), url: `https://randomfox.ca/images/${random()}.jpg` },
-    { id: generatetId(), url: `https://randomfox.ca/images/${random()}.jpg` },
-    { id: generatetId(), url: `https://randomfox.ca/images/${random()}.jpg` },
-    { id: generatetId(), url: `https://randomfox.ca/images/${random()}.jpg` },
-  ]);
+  const [images, setImages] = useState<Array<imageItems>>([]);
+
+  const addNewFox: MouseEventHandler<HTMLButtonElement> = (event) => {
+    const newImageItem: imageItems = {
+      id: generatetId(),
+      url: `https://randomfox.ca/images/${random()}.jpg`,
+    };
+    setImages([...images, newImageItem]);
+  };
   return (
     <div>
       <main>
         <h1 className="text-3xl font-bold underline">Hello world!</h1>
+        <button onClick={addNewFox}>Add new Fox</button>
         {images.map(({ id, url }) => (
           <div key={id} className="p-4">
             <RandomFox image={url} />
