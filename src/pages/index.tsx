@@ -2,11 +2,13 @@ import { LazyImage } from "@/components/LazyImage";
 import { useState } from "react";
 import type { MouseEventHandler } from "react";
 
-//generate a random function between 1 and 123
-const random = (): number => Math.floor(Math.random() * 123) + 1;
-
 //generate simple unique id
-const generatetId = () => Math.random().toString(36).substr(2, 9);
+const generatetId = () =>
+  Math.random().toString(36).substring(2, 15) +
+  Math.random().toString(36).substring(2, 15);
+
+//generate a random function between 1 and 123
+const random = (): number => Math.floor(Math.random() * 122) + 1;
 
 type imageItems = { id: string; url: string };
 
@@ -24,15 +26,23 @@ export default function Home() {
     <div>
       <main>
         <h1 className="text-3xl font-bold underline">Hello world!</h1>
-        <button onClick={addNewFox}>Add new Fox</button>
-        {images.map(({ id, url }) => (
+        <button
+          onClick={addNewFox}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+        >
+          Add new Fox
+        </button>
+        {images.map(({ id, url }, index) => (
           <div key={id} className="p-4">
             <LazyImage
               src={url}
               width={320}
               height="auto"
-              className="rounded bg-gray-300"
+              className="mx-auto rounded-md bg-gray-300"
               onClick={() => console.log("hey")}
+              onLazyLoad={(img) => {
+                console.log(`Image #${index + 1} cargada. Nodo:`, img);
+              }}
             />
           </div>
         ))}
