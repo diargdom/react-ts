@@ -1,9 +1,9 @@
-import type { JSX } from "react";
+import { useRef, type JSX } from "react";
 
 type Props = { image: string };
 export const RandomFox = ({ image }: Props): JSX.Element => {
+  const node = useRef<HTMLImageElement>(null);
   return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img width={320} height="auto" src={image} className="rounded" />
+    <img ref={node} width={320} height="auto" src={image} className="rounded" />
   );
 };
