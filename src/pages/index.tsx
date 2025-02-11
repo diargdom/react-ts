@@ -20,6 +20,7 @@ export default function Home() {
       url: `https://randomfox.ca/images/${myRandom()}.jpg`,
     };
     setImages([...images, newImageItem]);
+    window.plausible(PlausibleEvents.ADD_FOX);
   };
   return (
     <div>
