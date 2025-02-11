@@ -1,10 +1,5 @@
-import {
-  useEffect,
-  useRef,
-  useState,
-  type JSX,
-  type ImgHTMLAttributes,
-} from "react";
+import { useEffect, useRef, useState } from "react";
+import type { ImgHTMLAttributes, JSX } from "react";
 
 type LazyImageProps = {
   src: string;

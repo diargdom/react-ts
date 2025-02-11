@@ -10,13 +10,11 @@ const generatetId = () =>
 //generate a random function between 1 and 123
 const random = (): number => Math.floor(Math.random() * 122) + 1;
 
-type imageItems = { id: string; url: string };
-
 export default function Home() {
-  const [images, setImages] = useState<Array<imageItems>>([]);
+  const [images, setImages] = useState<Array<IFoxImageItems>>([]);
 
   const addNewFox: MouseEventHandler<HTMLButtonElement> = () => {
-    const newImageItem: imageItems = {
+    const newImageItem: IFoxImageItems = {
       id: generatetId(),
       url: `https://randomfox.ca/images/${random()}.jpg`,
     };
